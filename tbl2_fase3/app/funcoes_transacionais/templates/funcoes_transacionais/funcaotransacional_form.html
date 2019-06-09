@@ -1,5 +1,134 @@
-<h1>Criar função transacional</h1>
-<form method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit" />
-</form>
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Página de testes</title>
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+</head>
+
+<body>
+    <h1>Criar função transacional</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit" />
+    </form>
+    <script type="text/javascript">
+        var alr = $("#id_qtd_alr");
+        var der = $("#id_qtd_der");
+        var tipo_funcao = $("#id_tipo_funcao");
+        var ponto_funcao = document.getElementById("id_pontos_de_funcao");
+        var complexidade = document.getElementById("id_complexidade");
+
+        ponto_funcao.disabled = true;
+        complexidade.disabled = true;
+
+        alr.change(function () {
+            if (der.val() != '') {
+                verificando_grupo()
+            }
+        })
+
+        der.change(function () {
+            if (alr.val() != '') {
+                verificando_grupo()
+            }
+        })
+
+        function verificando_grupo() {
+            if (tipo_funcao.val() == 'EE') {
+                if (der.val() >= 1 && der.val() <= 4 && alr.val() >= 0 && alr.val() <= 1){
+                    complexidade.value = 'baixa'
+                    ponto_funcao.value = 3
+                } else if (der.val() >= 1 && der.val() <= 4 && alr.val() >= 2 && alr.val() <= 3){
+                    complexidade.value = 'baixa'
+                    ponto_funcao.value = 3
+                } else if (der.val() >= 1 && der.val() <= 4 && alr.val() >= 4){
+                    complexidade.value = 'media'
+                    ponto_funcao.value = 4
+                } else if (der.val() >= 5 && der.val() <= 15 && alr.val() >= 0 && alr.val() <= 1){
+                    complexidade.value = 'baixa'
+                    ponto_funcao.value = 3
+                } else if (der.val() >= 5 && der.val() <= 15 && alr.val() >= 2 && alr.val() <= 3){
+                    complexidade.value = 'media'
+                    ponto_funcao.value = 4
+                } else if (der.val() >= 5 && der.val() <= 15 && alr.val() >= 4){
+                    complexidade.value = 'alta'
+                    ponto_funcao.value = 6
+                } else if (der.val() >= 16 && alr.val() >= 0 && alr.val() <= 1){
+                    complexidade.value = 'media'
+                    ponto_funcao.value = 4
+                } else if (der.val() >= 16 && alr.val() >= 2 && alr.val() <= 3){
+                    complexidade.value = 'alta'
+                    ponto_funcao.value = 6
+                } else if (der.val() >= 16 && alr.val() >= 4){
+                    complexidade.value = 'alta'
+                    ponto_funcao.value = 6
+                }
+            } else if (tipo_funcao.val() == 'CE') {
+                if (der.val() >= 1 && der.val() <= 4 && alr.val() >= 0 && alr.val() <= 1){
+                    complexidade.value = 'baixa'
+                    ponto_funcao.value = 3
+                } else if (der.val() >= 1 && der.val() <= 4 && alr.val() >= 2 && alr.val() <= 3){
+                    complexidade.value = 'baixa'
+                    ponto_funcao.value = 3
+                } else if (der.val() >= 1 && der.val() <= 4 && alr.val() >= 4){
+                    complexidade.value = 'media'
+                    ponto_funcao.value = 4
+                } else if (der.val() >= 5 && der.val() <= 19 && alr.val() >= 0 && alr.val() <= 1){
+                    complexidade.value = 'baixa'
+                    ponto_funcao.value = 3
+                } else if (der.val() >= 5 && der.val() <= 19 && alr.val() >= 2 && alr.val() <= 3){
+                    complexidade.value = 'media'
+                    ponto_funcao.value = 4
+                } else if (der.val() >= 5 && der.val() <= 19 && alr.val() >= 4){
+                    complexidade.value = 'alta'
+                    ponto_funcao.value = 6
+                } else if (der.val() >= 20 && alr.val() >= 0 && alr.val() <= 1){
+                    complexidade.value = 'media'
+                    ponto_funcao.value = 4
+                } else if (der.val() >= 20 && alr.val() >= 2 && alr.val() <= 3){
+                    complexidade.value = 'alta'
+                    ponto_funcao.value = 6
+                } else if (der.val() >= 20 && alr.val() >= 4){
+                    complexidade.value = 'alta'
+                    ponto_funcao.value = 6
+                }
+            } else if (tipo_funcao.val() == 'SE'){
+                
+                if (der.val() >= 1 && der.val() <= 5 && alr.val() >= 0 && alr.val() <= 1){
+                    complexidade.value = 'baixa'
+                    ponto_funcao.value = 4
+                } else if (der.val() >= 1 && der.val() <= 5 && alr.val() >= 2 && alr.val() <= 3){
+                    complexidade.value = 'baixa'
+                    ponto_funcao.value = 4
+                } else if (der.val() >= 1 && der.val() <= 5 && alr.val() >= 4){
+                    complexidade.value = 'media'
+                    ponto_funcao.value = 5
+                } else if (der.val() >= 6 && der.val() <= 19 && alr.val() >= 0 && alr.val() <= 1){
+                    complexidade.value = 'baixa'
+                    ponto_funcao.value = 4
+                } else if (der.val() >= 6 && der.val() <= 19 && alr.val() >= 2 && alr.val() <= 3){
+                    complexidade.value = 'media'
+                    ponto_funcao.value = 5
+                } else if (der.val() >= 6 && der.val() <= 19 && alr.val() >= 4){
+                    complexidade.value = 'alta'
+                    ponto_funcao.value = 7
+                } else if (der.val() >= 20 && alr.val() >= 0 && alr.val() <= 1){
+                    complexidade.value = 'media'
+                    ponto_funcao.value = 5
+                } else if (der.val() >= 20 && alr.val() >= 2 && alr.val() <= 3){
+                    complexidade.value = 'alta'
+                    ponto_funcao.value = 7
+                } else if (der.val() >= 20 && alr.val() >= 4){
+                    complexidade.value = 'alta'
+                    ponto_funcao.value = 7
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
