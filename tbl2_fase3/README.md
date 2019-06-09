@@ -1,4 +1,4 @@
-## Intruções de uso
+## Instruções de uso
 
 ### Dependências
 
@@ -12,7 +12,11 @@ Para iniciar o projeto basta utilizar o comando:
 
 ```
 docker-compose up dev
+
 ```
+
+Assim que o comando terminar sua execução o sistema estará disponível em localhost:8080
 
 **OBS:** A primeira vez que o comando for usado pode levar um pouco mais
 de tempo pois a imagem precisa ser gerada em seu computador.
+
