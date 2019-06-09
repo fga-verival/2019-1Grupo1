@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.test import Client
+from django.core.exceptions import ValidationError
 from funcoes_transacionais.models import FuncaoTransacional
 from funcoes_transacionais.views import FTransacionalList
 
@@ -16,6 +17,45 @@ class User_Form_Test(TestCase):
         with self.assertRaises(Exception):
             form = FuncaoTransacional.objects.create(nome='', contador='', tipo_funcao='', complexidade='', qtd_alr=0, qtd_der=0, pontos_de_funcao=0)
             self.assertFalse(form.isvalid())
+
+class TestCase2(TestCase):
+
+    def test_alr_lower_than_zero(self):
+        with self.assertRaises(TypeError, msg='ALR nao pode ficar nulo ou com valores abaixo de 0'):
+            funcao = FuncaoTransacional(
+                    nome="bla",
+                    contador="42",
+                    tipo_funcao="CE",
+                    complexidade="baixa",
+                    qtd_alr=-1,
+                    qtd_der=1,
+                    pontos_de_funcao=42)
+            funcao.save()
+
+    def test_der_lower_than_one(self):
+        with self.assertRaises(TypeError, msg='DER nao pode ficar nulo ou com valores iguais ou abaixo de 0'):
+            funcao = FuncaoTransacional(
+                    nome="bla",
+                    contador="42",
+                    tipo_funcao="CE",
+                    complexidade="baixa",
+                    qtd_alr=1,
+                    qtd_der=0,
+                    pontos_de_funcao=42)
+            funcao.save()
+
+    def test_ee_type(self):
+        funcao = FuncaoTransacional(
+                nome="bla",
+                contador="42",
+                tipo_funcao="EE",
+                complexidade="baixa",
+                qtd_alr=1,
+                qtd_der=2
+                )
+        funcao.save()
+        self.assertEqual(funcao.pontos_de_funcao, 3)
+        self.assertEqual(funcao.complexidade, "baixa")
 
 class TestCase3(TestCase):
 
