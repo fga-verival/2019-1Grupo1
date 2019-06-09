@@ -11,6 +11,8 @@
 <body>
     <h1>Criar função transacional</h1>
     <form method="post">
+        <div id="errors"></div>
+
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Submit" id="submit-button"/>
@@ -21,13 +23,35 @@
         var tipo_funcao = $("#id_tipo_funcao");
         var ponto_funcao = document.getElementById("id_pontos_de_funcao");
         var complexidade = document.getElementById("id_complexidade");
+        var errors = document.getElementById("errors");
 
         ponto_funcao.disabled = true;
         complexidade.disabled = true;
 
-        $("#submit-button").click(function(){
-            ponto_funcao.disabled = false;
-            complexidade.disabled = false;
+        $("#submit-button").click(function(event){
+            if(alr.val() < 0){ 
+                event.preventDefault();
+                var alr_error = document.createElement("p");
+                var text_error = document.createTextNode("ALR less than 0 is not allowed");
+                alr_error.appendChild(text_error);
+                alr_error.appendChild(document.createElement("br"));
+                errors.append(alr_error);
+            }
+            
+            if(der.val() < 1){
+                event.preventDefault();
+                var der_error = document.createElement("p");
+                var text_error = document.createTextNode("DER less than 0 is not allowed");
+                der_error.appendChild(text_error);
+                der_error.appendChild(document.createElement("br"));
+                errors.append(der_error);   
+            }
+            
+            if (der.val() >= 1 && alr.val() >= 0 ){
+                ponto_funcao.disabled = false;
+                complexidade.disabled = false;
+            }
+
         })
 
         alr.change(function () {
