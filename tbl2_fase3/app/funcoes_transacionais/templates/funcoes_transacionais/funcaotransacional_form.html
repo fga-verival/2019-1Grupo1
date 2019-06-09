@@ -29,6 +29,8 @@
         complexidade.disabled = true;
 
         $("#submit-button").click(function(event){
+            console.log()
+
             if(alr.val() < 0){ 
                 event.preventDefault();
                 var alr_error = document.createElement("p");
@@ -47,26 +49,35 @@
                 errors.append(der_error);   
             }
             
-            if (der.val() >= 1 && alr.val() >= 0 ){
+            if (der.val() >= 1 && alr.val() >= 0 && (tipo_funcao.val() == 'EE' || tipo_funcao.val() == 'CE' || tipo_funcao.val() == 'SE')){
                 ponto_funcao.disabled = false;
                 complexidade.disabled = false;
             }
 
         })
 
-        alr.change(function () {
-            if (der.val() != '') {
-                verificando_grupo()
+        function verificandoCampos(){
+            if (alr.val() != '' && alr.val() >= 0 && der.val() >= 1 && der.val() != '' && tipo_funcao.val() != '') {
+                verificandoGrupo()
+            }else{
+                ponto_funcao.value=''
+                complexidade.value=''
             }
+        }
+
+        alr.change(function () {
+            verificandoCampos();
         })
 
         der.change(function () {
-            if (alr.val() != '') {
-                verificando_grupo()
-            }
+            verificandoCampos();
         })
 
-        function verificando_grupo() {
+        tipo_funcao.change(function(){
+            verificandoCampos();
+        })
+
+        function verificandoGrupo() {
             if (tipo_funcao.val() == 'EE') {
                 if (der.val() >= 1 && der.val() <= 4 && alr.val() >= 0 && alr.val() <= 1){
                     complexidade.value = 'baixa'
@@ -155,6 +166,9 @@
                     complexidade.value = 'alta'
                     ponto_funcao.value = 7
                 }
+            }else{
+                ponto_funcao.value=''
+                complexidade.value=''
             }
         }
     </script>

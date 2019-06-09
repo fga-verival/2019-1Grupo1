@@ -8,6 +8,13 @@ from funcoes_transacionais.models import FuncaoTransacional
 
 class FTransacionalList(ListView):
     model = FuncaoTransacional
+    
+    def get_context_data(self, **kwargs):
+        funcoes = super(FTransacionalList, self).get_context_data(**kwargs)
+        funcoes['soma_ce'] = sum(i.pontos_de_funcao for i in FuncaoTransacional.objects.filter(tipo_funcao = 'CE')) 
+        funcoes['soma_se'] = sum(i.pontos_de_funcao for i in FuncaoTransacional.objects.filter(tipo_funcao = 'SE'))
+        funcoes['soma_ee'] =  sum(i.pontos_de_funcao for i in FuncaoTransacional.objects.filter(tipo_funcao = 'EE'))
+        return funcoes
 
 class FTransacionalView(DetailView):
     model = FuncaoTransacional
