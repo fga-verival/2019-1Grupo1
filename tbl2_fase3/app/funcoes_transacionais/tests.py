@@ -11,6 +11,8 @@ class User_Form_Test(TestCase):
 
     # Invalid Form Data
     def test_UserForm_invalid(self):
-        form = FuncaoTransacional.objects.create(nome='', contador='', tipo_funcao='', complexidade='', qtd_alr=0, qtd_der=0, pontos_de_funcao=0)
-        self.assertFalse(form.isvalid())
+
+        with self.assertRaises(Exception):
+            form = FuncaoTransacional.objects.create(nome='', contador='', tipo_funcao='', complexidade='', qtd_alr=0, qtd_der=0, pontos_de_funcao=0)
+            self.assertFalse(form.isvalid())
 
