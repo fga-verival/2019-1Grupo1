@@ -54,3 +54,9 @@ class FuncaoTransacional(models.Model):
     def __str__(self):
         return self.nome
 
+    def isvalid(self):
+        if(self.nome == '' or self.contador == '' or self.tipo_funcao == '' or self.complexidade == '' or self.qtd_alr == '' or self.qtd_der == '' or self.pontos_de_funcao == ''):
+            return False
+        else:
+            return True
+
