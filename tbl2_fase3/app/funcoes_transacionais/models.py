@@ -1,6 +1,6 @@
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 
-# Create your models here.
 
 class FuncaoTransacional(models.Model):
 
@@ -38,11 +38,13 @@ class FuncaoTransacional(models.Model):
     )
 
     qtd_alr = models.IntegerField(
-        blank=False
+        blank=False,
+        validators=[MinValueValidator(0)]
     )
 
     qtd_der = models.IntegerField(
-        blank=False
+        blank=False,
+        validators=[MinValueValidator(1)]
     )
 
     pontos_de_funcao = models.IntegerField()
@@ -53,4 +55,11 @@ class FuncaoTransacional(models.Model):
 
     def __str__(self):
         return self.nome
+
+    def save(self, *args, **kwargs):
+        if self.tipo_funcao == "EE":
+            if self.qtd_der >= 1 and self.qtd_der <= 4 and self.qtd_alr >= 0 and self.qtd_alr <= 1:
+                self.complexidade = "baixa"
+                self.pontos_de_funcao = 3
+        super(FuncaoTransacional, self).save(*args, **kwargs)
 
