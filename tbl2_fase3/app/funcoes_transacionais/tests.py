@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.test import Client
 from funcoes_transacionais.models import FuncaoTransacional
+from funcoes_transacionais.views import FTransacionalList
 
 class User_Form_Test(TestCase):
 
@@ -43,11 +44,16 @@ class TestCase3(TestCase):
             qtd_der=1
         )
 
-    def test_validating_complexity(self):
+    def test_validation_complexity(self):
 
         self.assertTrue('baixa', self.funcao_obj_ce.complexidade)
         self.assertTrue('baixa', self.funcao_obj_ee.complexidade)
         self.assertTrue('baixa', self.funcao_obj_se.complexidade)
+    
+    def test_validation_function_points(self):
+        self.assertEqual(3, self.funcao_obj_ce.pontos_de_funcao)
+        self.assertEqual(3, self.funcao_obj_ee.pontos_de_funcao)
+        self.assertEqual(4, self.funcao_obj_se.pontos_de_funcao)
 
     def test_null_der_value(self):
 
@@ -86,6 +92,4 @@ class TestCase5(TestCase):
                     tipo_funcao = 'EE',
                     qtd_alr=1,
                     qtd_der=1
-                )
-
-
+        )
