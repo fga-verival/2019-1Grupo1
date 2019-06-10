@@ -44,7 +44,7 @@ class TestCase2(TestCase):
                     pontos_de_funcao=42)
             funcao.save()
 
-    def test_ee_type(self):
+    def test_low_complexity(self):
         funcao = FuncaoTransacional(
                 nome="bla",
                 contador="42",
@@ -56,6 +56,19 @@ class TestCase2(TestCase):
         funcao.save()
         self.assertEqual(funcao.pontos_de_funcao, 3)
         self.assertEqual(funcao.complexidade, "baixa")
+
+    def test_high_complexity(self):
+        funcao = FuncaoTransacional(
+                nome="bla",
+                contador="42",
+                tipo_funcao="EE",
+                complexidade="baixa",
+                qtd_alr=18,
+                qtd_der=18
+                )
+        funcao.save()
+        self.assertEqual(funcao.pontos_de_funcao, 6)
+        self.assertEqual(funcao.complexidade, "alta")
 
 class TestCase3(TestCase):
 
