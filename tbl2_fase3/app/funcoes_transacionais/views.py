@@ -10,11 +10,25 @@ class FTransacionalList(ListView):
     model = FuncaoTransacional
     
     def get_context_data(self, **kwargs):
+        
+        query_ft_ce = FuncaoTransacional.objects.filter(tipo_funcao = 'CE')
+        query_ft_se = FuncaoTransacional.objects.filter(tipo_funcao = 'SE')
+        query_ft_ee = FuncaoTransacional.objects.filter(tipo_funcao = 'EE')
+
         funcoes = super(FTransacionalList, self).get_context_data(**kwargs)
-        funcoes['soma_ce'] = sum(i.pontos_de_funcao for i in FuncaoTransacional.objects.filter(tipo_funcao = 'CE')) 
-        funcoes['soma_se'] = sum(i.pontos_de_funcao for i in FuncaoTransacional.objects.filter(tipo_funcao = 'SE'))
-        funcoes['soma_ee'] =  sum(i.pontos_de_funcao for i in FuncaoTransacional.objects.filter(tipo_funcao = 'EE'))
+
+        funcoes['soma_ce'] = self.get_sum(query_ft_ce)
+        funcoes['soma_ee'] = self.get_sum(query_ft_ee)
+        funcoes['soma_se'] = self.get_sum(query_ft_se)
+
         return funcoes
+
+    def get_sum(self, query):
+
+        pf_values = list(map(lambda obj : obj.pontos_de_funcao, query))
+    
+        return sum(pf_values)
+
 
 class FTransacionalView(DetailView):
     model = FuncaoTransacional

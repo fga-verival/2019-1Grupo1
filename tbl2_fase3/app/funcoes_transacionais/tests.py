@@ -86,10 +86,37 @@ class TestCase5(TestCase):
         self.assertEqual(query_list[0].qtd_der, 1)
 
     def test_database_connection(self):
-         funcao_obj_ee = FuncaoTransacional.objects.create(
+
+        
+        funcao_obj_ee = FuncaoTransacional.objects.create(
                     nome = 'placeholder_name',
                     contador = 'placeholder_contador',
                     tipo_funcao = 'EE',
                     qtd_alr=1,
                     qtd_der=1
         )
+
+class TestCase6(TestCase):
+
+    def test_sum_functionality(self):
+        
+        funcao_obj_ee_1 = FuncaoTransacional.objects.create(
+                    nome = 'placeholder_name',
+                    contador = 'placeholder_contador',
+                    tipo_funcao = 'EE',
+                    qtd_alr=1,
+                    qtd_der=1
+        )
+
+        funcao_obj_ee_1 = FuncaoTransacional.objects.create(
+                    nome = 'placeholder_name',
+                    contador = 'placeholder_contador',
+                    tipo_funcao = 'EE',
+                    qtd_alr=1,
+                    qtd_der=1
+        )
+
+        query_ft_ee = FuncaoTransacional.objects.filter(tipo_funcao = 'EE')
+
+        self.assertEqual(6, FTransacionalList().get_sum(query_ft_ee))
+
