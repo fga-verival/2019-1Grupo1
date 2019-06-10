@@ -3,7 +3,6 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-# Create your models here.
 
 class FuncaoTransacional(models.Model):
 
@@ -66,11 +65,16 @@ class FuncaoTransacional(models.Model):
 
     def validate_der(self):
         if(self.qtd_der is None or self.qtd_der <=0):
-            raise TypeError('DER nao pode ficar nulo ou com valores abaixo de 0')
+            raise TypeError('DER nao pode ficar nulo ou com valores iguais ou abaixo de 0')
+
+    def validate_alr(self):
+        if(self.qtd_alr is None or self.qtd_alr < 0):
+            raise TypeError('ALR nao pode ficar nulo ou com valores abaixo de 0')
 
     def save(self, *args, **kwargs):
 
         self.validate_der()
+        self.validate_alr()
 
         if(self.tipo_funcao == 'EE'):
 
