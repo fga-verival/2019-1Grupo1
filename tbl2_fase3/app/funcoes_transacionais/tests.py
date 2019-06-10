@@ -59,3 +59,33 @@ class TestCase3(TestCase):
                 qtd_alr=1
             )
 
+class TestCase5(TestCase):
+
+    def test_database_inserting(self):
+
+        funcao_obj_ee = FuncaoTransacional.objects.create(
+            nome = 'placeholder_name',
+            contador = 'placeholder_contador',
+            tipo_funcao = 'EE',
+            qtd_alr=1,
+            qtd_der=1
+        )
+
+        query_list = FuncaoTransacional.objects.all()
+        self.assertEqual(len(FuncaoTransacional.objects.all()), 1)
+        self.assertEqual(query_list[0].nome, 'placeholder_name')
+        self.assertEqual(query_list[0].contador, 'placeholder_contador')
+        self.assertEqual(query_list[0].tipo_funcao, 'EE')
+        self.assertEqual(query_list[0].qtd_alr, 1)
+        self.assertEqual(query_list[0].qtd_der, 1)
+
+    def test_database_connection(self):
+         funcao_obj_ee = FuncaoTransacional.objects.create(
+                    nome = 'placeholder_name',
+                    contador = 'placeholder_contador',
+                    tipo_funcao = 'EE',
+                    qtd_alr=1,
+                    qtd_der=1
+                )
+
+
