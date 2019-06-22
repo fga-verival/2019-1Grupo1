@@ -1,0 +1,120 @@
+<h1>Funções Transacionais</h1>
+
+<button><a href="{% url 'ftrans_new' %}">Novo</a></button>
+
+<h2>Saídas externas</h2>
+
+<table border="1">
+<thead>
+    <tr>
+    <th>Nome</th>
+    <th>Contador</th>
+    <th>complexidade</th>
+    <th>Quant. ALR</th>
+    <th>Quant. DER</th>
+    <th>Pontos por função</th>
+    <th>Data</th>
+    <th>Visualizar</th>
+    <th>Editar</th>
+    <th>Deletar</th>
+    </tr>
+</thead>
+<tbody>
+    {% for trans in object_list %}
+        {% if trans.tipo_funcao == 'SE'%}
+            <tr>
+            <td>{{ trans.nome }}</td>
+            <td>{{ trans.contador }}</td>
+            <td>{{ trans.complexidade }}</td>
+            <td>{{ trans.qtd_alr }}</td>
+            <td>{{ trans.qtd_der }}</td>
+            <td>{{ trans.pontos_de_funcao }}</td>
+            <td>{{ trans.data_cadastro }}</td>
+            <td><a href="{% url 'ftrans_view' trans.id %}">Ver</a></td>
+            <td><a href="{% url 'ftrans_edit' trans.id %}">Editar</a></td>
+            <td><a href="{% url 'ftrans_delete' trans.id %}">Deletar</a></td>
+            </tr>
+        {% endif%}
+    {% endfor %}
+</tbody>
+</table>
+
+<h3><strong>Soma PF de Saídas Externas: </strong> {{soma_se}}</h3>
+
+<h2>Entradas Externas</h2>
+
+<table border="1">
+<thead>
+    <tr>
+    <th>Nome</th>
+    <th>Contador</th>
+    <th>complexidade</th>
+    <th>Quant. ALR</th>
+    <th>Quant. DER</th>
+    <th>Pontos por função</th>
+    <th>Data</th>
+    <th>Visualizar</th>
+    <th>Editar</th>
+    <th>Deletar</th>
+    </tr>
+</thead>
+<tbody>
+    {% for trans in object_list %}
+        {% if trans.tipo_funcao == 'EE'%}
+            <tr>
+            <td>{{ trans.nome }}</td>
+            <td>{{ trans.contador }}</td>
+            <td>{{ trans.complexidade }}</td>
+            <td>{{ trans.qtd_alr }}</td>
+            <td>{{ trans.qtd_der }}</td>
+            <td>{{ trans.pontos_de_funcao }}</td>
+            <td>{{ trans.data_cadastro }}</td>
+            <td><a href="{% url 'ftrans_view' trans.id %}">Ver</a></td>
+            <td><a href="{% url 'ftrans_edit' trans.id %}">Editar</a></td>
+            <td><a href="{% url 'ftrans_delete' trans.id %}">Deletar</a></td>
+            </tr>
+        {% endif%}
+    {% endfor %}
+</tbody>
+</table>
+
+<h3><strong>Soma PF de Entradas Externas: </strong> {{soma_ee}}</h3>
+
+<h2>Consultas Externas</h2>
+
+<table border="1">
+<thead>
+    <tr>
+    <th>Nome</th>
+    <th>Contador</th>
+    <th>complexidade</th>
+    <th>Quant. ALR</th>
+    <th>Quant. DER</th>
+    <th>Pontos por função</th>
+    <th>Data</th>
+    <th>Visualizar</th>
+    <th>Editar</th>
+    <th>Deletar</th>
+    </tr>
+</thead>
+<tbody>
+    {% for trans in object_list %}
+        {% if trans.tipo_funcao == 'CE'%}
+            <tr>
+            <td>{{ trans.nome }}</td>
+            <td>{{ trans.contador }}</td>
+            <td>{{ trans.complexidade }}</td>
+            <td>{{ trans.qtd_alr }}</td>
+            <td>{{ trans.qtd_der }}</td>
+            <td>{{ trans.pontos_de_funcao }}</td>
+            <td>{{ trans.data_cadastro }}</td>
+            <td><a href="{% url 'ftrans_view' trans.id %}">Ver</a></td>
+            <td><a href="{% url 'ftrans_edit' trans.id %}">Editar</a></td>
+            <td><a href="{% url 'ftrans_delete' trans.id %}">Deletar</a></td>
+            </tr>
+        {% endif%}
+    {% endfor %}
+</tbody>
+</table>
+
+<h3><strong>Soma PF de Entradas Externas: </strong> {{soma_ce}}</h3>
